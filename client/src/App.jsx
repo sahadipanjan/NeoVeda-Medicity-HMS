@@ -1,5 +1,6 @@
 import React from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
+import { SpeedInsights } from '@vercel/speed-insights/react';
 import { useAuth } from './context/AuthContext';
 import RoleGuard, { useEffectiveRole } from './components/RoleGuard';
 import Login from './pages/Login';
@@ -63,42 +64,45 @@ export default function App() {
     const { isAuthenticated } = useAuth();
 
     return (
-        <Routes>
-            <Route path="/login" element={
-                isAuthenticated ? <Navigate to="/" replace /> : <Login />
-            } />
-            <Route path="/" element={
-                <ProtectedRoute><Layout /></ProtectedRoute>
-            }>
-                <Route index element={<SmartDashboard />} />
-                <Route path="patients" element={
-                    <RoleGuard allowedRoles={CLINICAL_ROLES}><Patients /></RoleGuard>
+        <>
+            <Routes>
+                <Route path="/login" element={
+                    isAuthenticated ? <Navigate to="/" replace /> : <Login />
                 } />
-                <Route path="doctors" element={
-                    <RoleGuard allowedRoles={[...CLINICAL_ROLES, 'Doctor']}><Doctors /></RoleGuard>
-                } />
-                <Route path="appointments" element={
-                    <RoleGuard allowedRoles={[...CLINICAL_ROLES, 'Doctor']}><Appointments /></RoleGuard>
-                } />
-                <Route path="wards" element={
-                    <RoleGuard allowedRoles={CLINICAL_ROLES}><Wards /></RoleGuard>
-                } />
-                <Route path="billing" element={
-                    <RoleGuard allowedRoles={BILLING_ROLES}><Billing /></RoleGuard>
-                } />
-                <Route path="tpa" element={
-                    <RoleGuard allowedRoles={TPA_ROLES}><TPA /></RoleGuard>
-                } />
-                <Route path="admin" element={
-                    <RoleGuard allowedRoles={['Super']}><Admin /></RoleGuard>
-                } />
-                <Route path="emr" element={
-                    <RoleGuard allowedRoles={DOCTOR_EMR_ROLES}><ClinicalNotes /></RoleGuard>
-                } />
-                <Route path="change-password" element={<ChangePassword />} />
-            </Route>
-            <Route path="*" element={<Navigate to="/" replace />} />
-        </Routes>
+                <Route path="/" element={
+                    <ProtectedRoute><Layout /></ProtectedRoute>
+                }>
+                    <Route index element={<SmartDashboard />} />
+                    <Route path="patients" element={
+                        <RoleGuard allowedRoles={CLINICAL_ROLES}><Patients /></RoleGuard>
+                    } />
+                    <Route path="doctors" element={
+                        <RoleGuard allowedRoles={[...CLINICAL_ROLES, 'Doctor']}><Doctors /></RoleGuard>
+                    } />
+                    <Route path="appointments" element={
+                        <RoleGuard allowedRoles={[...CLINICAL_ROLES, 'Doctor']}><Appointments /></RoleGuard>
+                    } />
+                    <Route path="wards" element={
+                        <RoleGuard allowedRoles={CLINICAL_ROLES}><Wards /></RoleGuard>
+                    } />
+                    <Route path="billing" element={
+                        <RoleGuard allowedRoles={BILLING_ROLES}><Billing /></RoleGuard>
+                    } />
+                    <Route path="tpa" element={
+                        <RoleGuard allowedRoles={TPA_ROLES}><TPA /></RoleGuard>
+                    } />
+                    <Route path="admin" element={
+                        <RoleGuard allowedRoles={['Super']}><Admin /></RoleGuard>
+                    } />
+                    <Route path="emr" element={
+                        <RoleGuard allowedRoles={DOCTOR_EMR_ROLES}><ClinicalNotes /></RoleGuard>
+                    } />
+                    <Route path="change-password" element={<ChangePassword />} />
+                </Route>
+                <Route path="*" element={<Navigate to="/" replace />} />
+            </Routes>
+            <SpeedInsights />
+        </>
     );
 }
 
