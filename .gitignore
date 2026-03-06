@@ -1,0 +1,54 @@
+# ─── Dependencies ───
+node_modules/
+.pnp/
+.pnp.js
+
+# ─── Environment Variables ───
+.env
+.env.local
+.env.development
+.env.production
+.env.staging
+.env.*.local
+
+# ─── Build Output ───
+dist/
+build/
+out/
+.next/
+.nuxt/
+
+# ─── IDE & Editor ───
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.project
+.classpath
+.settings/
+
+# ─── OS Artifacts ───
+.DS_Store
+Thumbs.db
+Desktop.ini
+*.lnk
+ehthumbs.db
+
+# ─── Logs ───
+*.log
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# ─── Testing & Coverage ───
+coverage/
+.nyc_output/
+
+# ─── Misc ───
+*.tsbuildinfo
+*.pid
+*.seed
+*.pid.lock
+.cache/
